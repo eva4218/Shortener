@@ -6,7 +6,7 @@ const shortURLSchema = new Schema({
     type: String,
     required: true,
   },
-  ShortURL: {
+  finalURL: {
     type: String,
     required: true,
   },
@@ -15,4 +15,4 @@ const shortURLSchema = new Schema({
   }
 })
 
-module.exports = mongoose.model('shortURL', shortURLSchema)
+module.exports = mongoose.model('short-URL', shortURLSchema)

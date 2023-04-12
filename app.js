@@ -22,8 +22,11 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
+app.engine('handlebars', exphbs({ defaultLayout: 'main'}))
+app.set('view engine', 'handlebars')
+
 app.get('/', (req, res) => {
-  res.send('hello')
+  res.render('index')
 })
 
 app.listen(3000, () => {

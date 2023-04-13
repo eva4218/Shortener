@@ -1,7 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
-const bodyParser = require('body-parser')
 
 const app = express()
 
@@ -25,8 +24,20 @@ db.once('open', () => {
 app.engine('handlebars', exphbs({ defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
+app.use(express.urlencoded({ extended: true }))
+
 app.get('/', (req, res) => {
   res.render('index')
+})
+
+app.get('/shortURL',(req, res)=>{
+  return res.render('shortener')
+})
+
+app.post('/shortener', (req,res)=>{
+  const inputURL=req.body.inputURL
+
+  return res.render('shortener')
 })
 
 app.listen(3000, () => {

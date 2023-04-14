@@ -3,8 +3,6 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const generateShortUrl = require('./generate_random')
 
-const localhost = 'http://localhost:3000'
-
 const modelURL = require('./models/short-URL')
 
 const app = express()
@@ -54,12 +52,14 @@ app.post('/shortener', (req, res) => {
 
 })
 
-
 app.get('/:random', (req, res) => {
   const random = req.params.random
-  res.send('ok')
+  modelURL.findOne({ finalURL: `http://localhost:3000/${random}` })
+.then(result => {
+  res.redirect(result.InputURL)
+})
 })
 
 app.listen(3000, () => {
-  console.log(`App is running on ${localhost}`)
+  console.log(`App is running on http://localhost:3000`)
 })

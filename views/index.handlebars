@@ -1,7 +1,6 @@
-{{!-- input URL --}}
-
 <form action="/shortener" method="POST" >
   <div class="row mb-3 g-2 text-center">
+    {{!-- input內需輸入網址, 且不得為空白 --}}
     <input type="url" name="inputURL" class="form-control" id="inputURL" placeholder="Input URL here" required="required">
   </div>
   <button type="submit" class="btn btn-outline-primary">Shortener</button>

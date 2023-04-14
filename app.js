@@ -37,15 +37,18 @@ app.post('/shortener', (req, res) => {
   const inputURL = req.body.inputURL
   const shortURL = generateShortUrl()
 
+  //在資料庫搜尋是否原始網址已在資料庫內,
   modelURL.findOne({ InputURL: inputURL })
     .lean()
     .then(result => {
+      //沒有資料則新做短網址
       if (result === null) {
         modelURL.create({ InputURL: inputURL, finalURL: shortURL })
           .then(() =>
             res.render('shortener', { shortURL })
           )
           .catch(error => console.log(error))
+          //若有資料則將對應的短網址送出來
       } else { res.render('shortener', { shortURL: result.finalURL }) }
     })
     .catch(error => console.log(error))

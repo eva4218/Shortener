@@ -5,10 +5,12 @@ const shortURLSchema = new Schema({
   InputURL: {
     type: String,
     required: true,
+    unique: true,
   },
   finalURL: {
     type: String,
     required: true,
+    unique: true,
   },
   done: {
     type: Boolean

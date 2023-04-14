@@ -13,13 +13,11 @@ function generateRandom() {
   //create a collection to store things user picked up
   let collection = lowerCaseLetters + upperCaseLetters + numbers
 
-  collection = collection.split('')
-
   //start generating random
   let random = ''
   for (let i = 1; i <= 5; i++) {
     random += sample(collection)
-  }
+git  }
 
   //return random
   return random

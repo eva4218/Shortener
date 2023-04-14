@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const generateShortUrl = require('./generate_random')
 
+const localhost = 'http://localhost:3000'
+
 const app = express()
 
 if (process.env.NODE_ENV !== 'production') {
@@ -22,7 +24,7 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main'}))
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.use(express.urlencoded({ extended: true }))
@@ -31,16 +33,19 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.get('/shortURL',(req, res)=>{
-  return res.render('shortener')
+app.post('/shortener', (req, res) => {
+  const inputURL = req.body.inputURL
+  const shortURL = generateShortUrl()
+  console.log(shortURL)
+  return res.render('shortener', { shortURL })
 })
 
-app.post('/shortener', (req,res)=>{
-  const inputURL=req.body.inputURL
-  console.log(generateShortUrl())
-  return res.render('shortener')
+
+app.get('/:random',(req,res)=>{
+  const random = req.params.random
+  res.send('ok')
 })
 
 app.listen(3000, () => {
-  console.log('App is running on http://localhost:3000')
+  console.log(`App is running on ${localhost}`)
 })

@@ -47,20 +47,30 @@ app.post('/shortener', (req, res) => {
           .then(() =>
             res.render('shortener', { shortURL })
           )
-          .catch(error => console.log(error))
-          //若有資料則將對應的短網址送出來
+          .catch(error => {
+            console.log(error)
+            res.render('errorPage', { error: error.message })
+          })
+        //若有資料則將對應的短網址送出來
       } else { res.render('shortener', { shortURL: result.finalURL }) }
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.log(error)
+      res.render('errorPage', { error: error.message })
+    })
 
 })
 
 app.get('/:random', (req, res) => {
   const random = req.params.random
   modelURL.findOne({ finalURL: `http://localhost:3000/${random}` })
-.then(result => {
-  res.redirect(result.InputURL)
-})
+    .then(result => {
+      res.redirect(result.InputURL)
+    })
+    .catch(error => {
+      console.log(error)
+      res.render('errorPage', { error: error.message })
+    })
 })
 
 app.listen(3000, () => {

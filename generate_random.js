@@ -17,7 +17,7 @@ function generateRandom() {
   let random = ''
   for (let i = 1; i <= 5; i++) {
     random += sample(collection)
-git  }
+  }
 
   //return random
   return random

@@ -7,19 +7,19 @@
 
 ### 開始使用
 若無 node.js 與 npm 請先安裝
-↓
+
 將專案 clone 到本地
-↓
+
 在本地開啟後，透過終端機進入資料夾，輸入：
 ```bash
 npm install
 ```
-↓
+
 安裝完畢後，繼續輸入：
 ```bash
 npm run start
 ```
-↓
+
 看到 
 ```bash
 App is running on http://localhost:3000

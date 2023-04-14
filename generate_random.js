@@ -3,7 +3,7 @@ function sample(collection) {
   return collection[randomIndex]
 }
 
-function generatePassword() {
+function generateRandom() {
 
   //define things user might want
   const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
@@ -15,14 +15,21 @@ function generatePassword() {
 
   collection = collection.split('')
 
-  //start generating password
-  let password = ''
+  //start generating random
+  let random = ''
   for (let i = 1; i <= 5; i++) {
-    password += sample(collection)
+    random += sample(collection)
   }
 
-  //return password
-  return password
+  //return random
+  return random
 }
 
-module.exports = generatePassword
+
+function generateShortUrl() {
+  let shortURL = `http://localhost:3000/${generateRandom()}`
+  return shortURL
+}
+generateShortUrl()
+
+module.exports = generateShortUrl

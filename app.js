@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const generateShortUrl = require('./generate_random')
 
 const app = express()
 
@@ -36,7 +37,7 @@ app.get('/shortURL',(req, res)=>{
 
 app.post('/shortener', (req,res)=>{
   const inputURL=req.body.inputURL
-
+  console.log(generateShortUrl())
   return res.render('shortener')
 })
 

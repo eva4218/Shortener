@@ -5,6 +5,8 @@ const generateShortUrl = require('./generate_random')
 
 const localhost = 'http://localhost:3000'
 
+const modelURL = require('./models/short-URL')
+
 const app = express()
 
 if (process.env.NODE_ENV !== 'production') {
@@ -36,12 +38,24 @@ app.get('/', (req, res) => {
 app.post('/shortener', (req, res) => {
   const inputURL = req.body.inputURL
   const shortURL = generateShortUrl()
-  console.log(shortURL)
-  return res.render('shortener', { shortURL })
+
+  modelURL.findOne({ InputURL: inputURL })
+    .lean()
+    .then(result => {
+      if (result === null) {
+        modelURL.create({ InputURL: inputURL, finalURL: shortURL })
+          .then(() =>
+            res.render('shortener', { shortURL })
+          )
+          .catch(error => console.log(error))
+      } else { res.render('shortener', { shortURL: result.finalURL }) }
+    })
+    .catch(error => console.log(error))
+
 })
 
 
-app.get('/:random',(req,res)=>{
+app.get('/:random', (req, res) => {
   const random = req.params.random
   res.send('ok')
 })

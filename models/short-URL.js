@@ -12,9 +12,7 @@ const shortURLSchema = new Schema({
     required: true,
     unique: true,
   },
-  done: {
-    type: Boolean
-  }
-})
+}
+)
 
 module.exports = mongoose.model('short-urls', shortURLSchema)
